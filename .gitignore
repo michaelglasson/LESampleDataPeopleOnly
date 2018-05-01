@@ -4,11 +4,11 @@
 # Log file
 *.log
 
-# BlueJ files
-*.ctxt
+# Eclipse
+bin/
+.classpath
+.project
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
 
 # Package Files #
 *.jar
