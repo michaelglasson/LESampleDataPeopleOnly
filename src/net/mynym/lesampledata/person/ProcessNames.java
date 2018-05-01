@@ -1,4 +1,4 @@
-package net.mynym.lesampledata;
+package net.mynym.lesampledata.person;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;

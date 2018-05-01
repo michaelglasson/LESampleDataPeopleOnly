@@ -1,4 +1,4 @@
-package net.mynym.lesampledata;
+package net.mynym.lesampledata.person;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LastNames {
-	List<String> theNames = new ArrayList<>(25000);
+public class FemaleFirstNames {
+	List<String> theNames = new ArrayList<>(2100);
 
 	public void createFromFile() throws FileNotFoundException, IOException {
-		try (BufferedReader br = new BufferedReader(new FileReader("LastNames10000.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("FemaleFirstNames.txt"))) {
 			String line;
 			while ((line = br.readLine()) != null) {
 				theNames.add(line);

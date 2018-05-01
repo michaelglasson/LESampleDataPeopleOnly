@@ -1,4 +1,4 @@
-package net.mynym.lesampledata;
+package net.mynym.lesampledata.person;
 
 import java.time.LocalDate;
 
