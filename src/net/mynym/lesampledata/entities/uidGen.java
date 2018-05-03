@@ -1,4 +1,4 @@
-package net.mynym.lesampledata.person;
+package net.mynym.lesampledata.entities;
 
 import java.util.Random;
 

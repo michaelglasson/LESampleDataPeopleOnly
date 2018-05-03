@@ -1,4 +1,4 @@
-package net.mynym.lesampledata.person;
+package net.mynym.lesampledata.entities;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +11,7 @@ public class HelperFunctions {
 		return l.get(r.nextInt(l.size()));
 	}
 
-	public boolean throwDice() {
+	public boolean flipCoin() {
 		return r.nextBoolean();
 	}
 	

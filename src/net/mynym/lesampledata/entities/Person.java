@@ -1,17 +1,23 @@
-package net.mynym.lesampledata.person;
+package net.mynym.lesampledata.entities;
 
 import java.time.LocalDate;
 
 public class Person {
-	String id;
-	String lastName;
-	String givenName1;
-	String givenName2;
-	String dateOfBirth;
-	String sex;
-	String countryOfCitizenship;
-	String isAlive;
-	String recordDate;
+	public String id;
+	public String lastName;
+	public String givenName1;
+	public String givenName2;
+	public String dateOfBirth;
+	public String sex;
+	public String countryOfCitizenship;
+	public String isAlive;
+	public String nominalLocality;
+	public String nominalPostcode;
+	public String originalContext;
+	public String recordDate;
+	
+	
+	
 	public String printHeader() {
 		StringBuilder line = new StringBuilder();
 		line.append("id" + "\t");
@@ -22,6 +28,9 @@ public class Person {
 		line.append("sex" + "\t");
 		line.append("countryOfCitizenship" + "\t");
 		line.append("isAlive" + "\t");
+		line.append("nominalLocality" + "\t");
+		line.append("nominalPostcode" + "\t");
+		line.append("originalContext" + "\t");
 		line.append("recordDate" + "\r\n");
 		return line.toString();
 		
@@ -36,6 +45,9 @@ public class Person {
 		line.append(sex + "\t");
 		line.append(countryOfCitizenship + "\t");
 		line.append(isAlive + "\t");
+		line.append(nominalLocality + "\t");
+		line.append(nominalPostcode + "\t");
+		line.append(originalContext + "\t");
 		line.append(recordDate + "\r\n");
 		return line.toString();
 	}

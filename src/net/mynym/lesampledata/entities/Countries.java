@@ -1,4 +1,4 @@
-package net.mynym.lesampledata.person;
+package net.mynym.lesampledata.entities;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Countries {
-	List<String> theNames = new ArrayList<>(200);
+	public List<String> theNames = new ArrayList<>(200);
 	Random r = new Random();
 	
 	public String getCountry() {
