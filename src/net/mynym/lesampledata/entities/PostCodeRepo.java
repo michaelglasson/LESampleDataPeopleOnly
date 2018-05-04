@@ -1,7 +1,6 @@
 package net.mynym.lesampledata.entities;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,9 +25,9 @@ public class PostCodeRepo {
 		return pAndS;
 	}
 
-	public void loadFromFile() throws FileNotFoundException, IOException {
+	public PostCodeRepo() {
 		String line;
-		try (BufferedReader br = new BufferedReader(new FileReader("Postcodes to Suburbs.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("Resources\\Postcodes to Suburbs.txt"))) {
 			while ((line = br.readLine()) != null) {
 				String[] splitArray = line.split("\\t", 60);
 				Postcode p = new Postcode();
@@ -37,12 +36,15 @@ public class PostCodeRepo {
 					p.suburbs.add(splitArray[i]);
 				}
 				postcodes.add(p);
-				Integer pCodePop = Integer.parseInt(splitArray[1]) % 1000;
+				Integer pCodePop = Integer.parseInt(splitArray[1]) / 1000;
 				for (int j = 0; j < pCodePop; j++) {
 					l.add(postcodes.size() - 1);
 				}
 			}
 			System.out.println(postcodes.size());
+		}
+		catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

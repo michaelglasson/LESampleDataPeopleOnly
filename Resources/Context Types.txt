@@ -1,4 +1,3 @@
-
 archery
 badminton
 baseball
