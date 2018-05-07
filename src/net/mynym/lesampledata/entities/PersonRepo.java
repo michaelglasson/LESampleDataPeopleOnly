@@ -3,59 +3,24 @@ package net.mynym.lesampledata.entities;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.Random;
 
 public class PersonRepo {
-	Map<String, Person> persons = new HashMap<>();
-	LastNames l = new LastNames();
-	FemaleFirstNames f = new FemaleFirstNames();
-	MaleFirstNames m = new MaleFirstNames();
-	HelperFunctions help = new HelperFunctions();
-	Countries c = new Countries();
-	Set<String> uidsUsed = new HashSet<>();
-	PostCodeRepo postcodes = new PostCodeRepo();
-
-	public Person createPerson() {
+	Map<Integer, Person> persons = new HashMap<>();
+	static Random r = new Random();
+	
+	public Person addNewPerson() {
 		Person p = new Person();
-		while (uidsUsed.add(p.id = uidGen.getKey6()) == false)
-			;
-		p.lastName = help.getRandom(l.theNames);
-		if (help.flipCoin()) {
-			p.givenName1 = help.getRandom(f.theNames);
-			p.givenName2 = help.getRandom(f.theNames);
-			p.sex = "F";
-		} else {
-			p.givenName1 = help.getRandom(m.theNames);
-			p.givenName2 = help.getRandom(m.theNames);
-			p.sex = "M";
-		}
-
-		LocalDate base = help.getRandomDateInLast20Years();
-		p.recordDate = base.toString();
-		p.dateOfBirth = help.getRandomAgeAtDate(base).toString();
-		p.country = c.getCountry();
-		if (LocalDate.parse(p.dateOfBirth).getYear() < LocalDate.parse(p.recordDate).getYear() - 60) {
-			p.isAlive = help.r.nextInt(100) > 50 ? "N" : "Y";
-		} else {
-			p.isAlive = help.r.nextInt(100) > 95 ? "N" : "Y";
-		}
-		if (p.country.equalsIgnoreCase("Australia")) {
-			PostCodeRepo.PostcodeAndSuburb s = postcodes.new PostcodeAndSuburb();
-			s = postcodes.getRandomPostcodeAndSuburb();
-			p.postcode = s.pCode;
-			p.locality = s.suburb;
-		} else {
-			p.locality = p.country;
-			p.postcode = "";
-		}
 		put(p);
 		return p;
-
 	}
+	
+	public Person getRandomPerson() {
+		return persons.get(r.nextInt(Person.lastId-Person.firstId)+Person.firstId);
+	}
+
 
 	public void writeToFile() throws IOException {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("Resources\\Person.txt"))) {
@@ -88,7 +53,7 @@ public class PersonRepo {
 		persons.put(p.id, p);
 	}
 
-	public Person get(String key) {
+	public Person get(Integer key) {
 		return persons.get(key);
 	}
 

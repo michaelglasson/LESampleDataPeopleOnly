@@ -1,22 +1,59 @@
 package net.mynym.lesampledata.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 /*
- * An association captures relationships between people and contexts
+ * An association is a type of Entity that contains other Entities
  */
-public class Association {
-	String id;
-	String type;
-	String name;
-	List<Person> participants = new ArrayList<>();
+public class Association implements Involvable {
+	static final Random r = new Random();
+	public static Integer firstId = 200 * 1000 * 1000;
+	public static Integer lastId = firstId;
+	public Integer id = lastId++;
+	public String type = AssociationTypes.getRandomAssociation();
+	public String name = type + " " + id;
+	public Set<Person> participants = new HashSet<>();
+	
+	public String toString() {
+		return id + "\t" + type + participants.size();
+	}
+	
+	public String listParticipants() {
+		StringBuilder s = new StringBuilder();
+		for (Person p: participants) {
+			s.append(p.toLine());
+		}
+		return s.toString();
+	}
 	
 	/*
 	 * Add a random number of participants chosen from the existing
 	 * PersonRepo
 	 */
-	public void createParticipants(PersonRepo repo) {
+	public void addSomeParticipants() {
+		// Add some number of Participants
+		int numOfParticipants = r.nextInt(10);
+		for (int i = 0; i <= numOfParticipants; i++) {
+			if (r.nextInt(100) > 50) {
+				// Create new Participant
+				participants.add(ContextRepo.pRepo.addNewPerson());
+			} else {
+				participants.add(ContextRepo.pRepo.getRandomPerson());
+			}
+			
+		}
 		
+	}
+
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	@Override
+	public String getType() {
+		return "Association";
 	}
 }
