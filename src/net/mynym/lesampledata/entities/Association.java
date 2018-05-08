@@ -16,14 +16,14 @@ public class Association implements Involvable {
 	public String name = type + " " + id;
 	public Set<Person> participants = new HashSet<>();
 	
-	public String toString() {
-		return id + "\t" + type + participants.size();
+	public String toLine() {
+		return id + "\t" + name + "\t" + type + "\r\n";
 	}
 	
 	public String listParticipants() {
 		StringBuilder s = new StringBuilder();
 		for (Person p: participants) {
-			s.append(p.toLine());
+			s.append(id + "\t" + p.id +"\r\n");
 		}
 		return s.toString();
 	}
@@ -36,7 +36,7 @@ public class Association implements Involvable {
 		// Add some number of Participants
 		int numOfParticipants = r.nextInt(10);
 		for (int i = 0; i <= numOfParticipants; i++) {
-			if (r.nextInt(100) > 50) {
+			if (r.nextInt(100) > 90) {
 				// Create new Participant
 				participants.add(ContextRepo.pRepo.addNewPerson());
 			} else {

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ActivityTypes {
-	static final List<String> types = Arrays.asList("Statement", "Research", "Scientific", "Observation");
+	static final List<String> types = Arrays.asList("Interview", "Research", "Scientific", "Observation");
 	static Random r = new Random();
 	
 	public static String getRandomActivity() {

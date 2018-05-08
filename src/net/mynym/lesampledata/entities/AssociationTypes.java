@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class AssociationTypes {
-	static List<String> types = Arrays.asList("Club", "Family", "Institution", "PresentAt");
+	static List<String> types = Arrays.asList("Club", "Family", "Institution", "Event");
 	static Random r = new Random();
 	
 	public static String getRandomAssociation() {

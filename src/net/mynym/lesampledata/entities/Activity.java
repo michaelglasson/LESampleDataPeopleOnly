@@ -22,8 +22,11 @@ public class Activity {
 		// This is only for deserialisation from file
 	}
 	
-	public String toString() {
-		return id + "\t" + contextId + "\t" + type + "\t" + date;
+	public static String printHeader() {
+		return "id\tcontextId\ttype\tdate\r\n";
+	}
+	public String toLine() {
+		return id + "\t" + contextId + "\t" + type + "\t" + date + "\r\n";
 	}
 	
 	public Activity(Context c) {
@@ -41,6 +44,7 @@ public class Activity {
 			c.finalisationDate = d.plusDays(7L).toString();
 		}
 		c.activities.add(this);
+		addSomeInvolvements();
 	}
 	
 	// Activity creates Involvements but Involvements add themselves to Context

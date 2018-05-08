@@ -14,6 +14,14 @@ public class Involvement {
 	public Integer activityId; // The Activity that discovered this Involvement
 	public Involvable entity; // Person, thing or association involved
 	
+	public static String printHeader() {
+		return "id\ttype\tcontextId\tactivityId\tentityType\tentityId\r\n";
+	}
+	 public String toLine() {
+		 return id + "\t" + type + "\t" + contextId + "\t" +
+				 activityId + "\t" + entity.getType() + "\t" + entity.getId() + "\r\n";
+	 }
+	
 	public Involvement() {
 		// This is for deserialisation from file
 	}
@@ -24,9 +32,9 @@ public class Involvement {
 		contextId = c.id;
 		c.involvements.add(this);
 		this.activityId = activityId;
-		if (r.nextInt(100) > 80) {
+		if (r.nextInt(100) > 20) {
 			// Want a person
-			if (r.nextInt(100) > 20) {
+			if (r.nextInt(100) > 80) {
 				// Create new person
 				entity = ContextRepo.pRepo.addNewPerson();
 			}

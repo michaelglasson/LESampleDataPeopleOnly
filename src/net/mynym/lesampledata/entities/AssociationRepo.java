@@ -5,25 +5,51 @@ import java.util.Map;
 import java.util.Random;
 
 public class AssociationRepo {
-	public static final Map<Integer, Association> associations = new HashMap<>();
+	public Map<Integer, Association> associations = new HashMap<>();
 	public static final Random r = new Random();
 	
 	public Association addNewAssociation() {
 		Association a = new Association();
+		a.addSomeParticipants();
 		put(a);
 		return a;
+	}
+	
+	public String printHeader() {
+		StringBuilder line = new StringBuilder();
+		line.append("id" + "\t");
+		line.append("name" + "\t");
+		line.append("type" + "\r\n");
+		return line.toString();
+	}
+
+	
+	public String listAssociationPersons() {
+		StringBuilder s = new StringBuilder();
+		for (Association a: associations.values()) {
+			s.append(a.listParticipants());
+		}
+		return s.toString();
 	}
 	
 	public String listAssociations() {
 		StringBuilder s = new StringBuilder();
 		for (Association a: associations.values()) {
-			s.append(a.toString());
+			s.append(a.toLine());
 		}
 		return s.toString();
 	}
 	
 	public Association getRandomAssociation() {
-		return associations.get(r.nextInt(Association.lastId-Association.firstId)+Association.firstId);
+		Association a;
+		if (associations.isEmpty()) {
+			a = new Association();
+			put(a);
+		} else {
+		a = associations.get(r.nextInt(Association.lastId-Association.firstId)+Association.firstId);
+		}
+		a.addSomeParticipants();
+		return a;
 	}
 	
 	public void put(Association a) {

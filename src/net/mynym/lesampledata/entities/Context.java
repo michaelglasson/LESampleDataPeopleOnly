@@ -27,19 +27,29 @@ public class Context {
 	public String finalStatus;
 	public Set<Activity> activities = new HashSet<>();
 	public Set<Involvement> involvements = new HashSet<>();
-	
+
+	void addSomeActivities() {
+		int numOfActivities = r.nextInt(5);
+		for (int i = 0; i <= numOfActivities; i++) {
+			new Activity(this);
+		}
+
+	}
+
 	public Context() {
 		// This for deserialisation from file
 	}
-	
+
 	public Context(Boolean byProgram) {
-	if (types == null) loadContextTypesFromFile();
-	name = "Context-" + id;
-	type = types.get(r.nextInt(types.size()));
-	team = "Team-" + (r.nextInt(98) + 1);
-	initiationDate = HelperFunctions.getRandomDateInLast20Years().toString();
+		if (types == null)
+			loadContextTypesFromFile();
+		name = "Context " + id;
+		type = types.get(r.nextInt(types.size()));
+		team = "Team-" + (r.nextInt(98) + 1);
+		initiationDate = HelperFunctions.getRandomDateInLast20Years().toString();
+		addSomeActivities();
 	}
-	
+
 	public void loadContextTypesFromFile() {
 		types = new ArrayList<>();
 		String line;
@@ -47,8 +57,7 @@ public class Context {
 			while ((line = br.readLine()) != null) {
 				types.add(line);
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -64,22 +73,21 @@ public class Context {
 		line.append((finalStatus == null ? "" : finalStatus) + "\r\n");
 		return line.toString();
 	}
-	
+
 	public String listActivities() {
 		StringBuilder s = new StringBuilder();
-		for (Activity a: activities) {
-			s.append(a.toString() + "\r\n");
+		for (Activity a : activities) {
+			s.append(a.toLine());
 		}
 		return s.toString();
 	}
 
 	public String listInvolvements() {
 		StringBuilder s = new StringBuilder();
-		for (Involvement i: involvements) {
-			s.append(i.toString() + "\r\n");
+		for (Involvement i : involvements) {
+			s.append(i.toLine() + "\r\n");
 		}
 		return s.toString();
 	}
-
 
 }

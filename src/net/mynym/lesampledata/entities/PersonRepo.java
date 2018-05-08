@@ -8,19 +8,25 @@ import java.util.Map;
 import java.util.Random;
 
 public class PersonRepo {
-	Map<Integer, Person> persons = new HashMap<>();
+	public Map<Integer, Person> persons = new HashMap<>();
 	static Random r = new Random();
 	
 	public Person addNewPerson() {
-		Person p = new Person();
+		Person p = new Person(true);
 		put(p);
 		return p;
+	}
+	
+	public void seed(int numOfPersons) {
+		for (int i = 0; i < numOfPersons; i++) {
+			Person p = new Person(true);
+			put(p);
+		}
 	}
 	
 	public Person getRandomPerson() {
 		return persons.get(r.nextInt(Person.lastId-Person.firstId)+Person.firstId);
 	}
-
 
 	public void writeToFile() throws IOException {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("Resources\\Person.txt"))) {

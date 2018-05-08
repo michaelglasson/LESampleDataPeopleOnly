@@ -20,16 +20,15 @@ public class ContextRepo {
 		return c;
 	}
 
-	public void writeToFile() throws IOException {
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("Resources\\Context.txt"))) {
-			bw.write(printHeader());
-			for (Context c : contexts.values()) {
-				bw.write(c.toLine());
-			}
+	public String listContexts() {
+		StringBuilder s = new StringBuilder();
+		for (Context c : contexts.values()) {
+			s.append(c.toLine());
 		}
+		return s.toString();
 	}
 
-	String printHeader() {
+	public String printHeader() {
 		StringBuilder line = new StringBuilder();
 		line.append("id" + "\t");
 		line.append("name" + "\t");
@@ -66,6 +65,5 @@ public class ContextRepo {
 			}
 		}
 	}
-
 
 }
