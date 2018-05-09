@@ -12,9 +12,18 @@ public class Association implements Involvable {
 	public static Integer firstId = 200 * 1000 * 1000;
 	public static Integer lastId = firstId;
 	public Integer id = lastId++;
+	public Integer countOfInvolvements = 0;
 	public String type = AssociationTypes.getRandomAssociation();
 	public String name = type + " " + id;
 	public Set<Person> participants = new HashSet<>();
+	
+	public Integer countOfInvolvements() {
+		return countOfInvolvements;
+	}
+	
+	public void incrementCountOfInvolvements() {
+		countOfInvolvements++;
+	}
 	
 	public String toLine() {
 		return id + "\t" + name + "\t" + type + "\r\n";
@@ -56,4 +65,5 @@ public class Association implements Involvable {
 	public String getType() {
 		return "Association";
 	}
+
 }

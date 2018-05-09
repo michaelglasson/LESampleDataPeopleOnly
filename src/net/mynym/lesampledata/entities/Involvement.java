@@ -6,7 +6,8 @@ import java.util.Random;
  * An Involvement is a link between a Context and an Entity or Association
  */
 public class Involvement {
-	public static Integer lastId = 400 * 1000 * 1000;
+	public static Integer firstId = 400 * 1000 * 1000;
+	public static Integer lastId = firstId;
 	public Integer id;
 	static Random r = new Random();
 	public String type;
@@ -14,6 +15,9 @@ public class Involvement {
 	public Integer activityId; // The Activity that discovered this Involvement
 	public Involvable entity; // Person, thing or association involved
 	
+	public static int countOfInvolvement() {
+		return lastId-firstId;
+	}
 	public static String printHeader() {
 		return "id\ttype\tcontextId\tactivityId\tentityType\tentityId\r\n";
 	}
@@ -57,8 +61,8 @@ public class Involvement {
 			// In any case, add some participants
 			a.addSomeParticipants();
 			entity = a;
-
 		}
+		entity.incrementCountOfInvolvements();
 	}
 	
 	

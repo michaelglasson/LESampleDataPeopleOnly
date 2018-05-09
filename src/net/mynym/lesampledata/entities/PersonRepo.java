@@ -1,15 +1,43 @@
 package net.mynym.lesampledata.entities;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
+import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+
 public class PersonRepo {
 	public Map<Integer, Person> persons = new HashMap<>();
 	static Random r = new Random();
+	public GraphDatabaseService db;
+	
+	public void startGraphService() {
+		db = new GraphDatabaseFactory()
+				.newEmbeddedDatabase(new File("C:\\Users\\mg\\Documents\\neo4j\\data\\databases\\graph.db"));
+	}
+	
+	public enum person implements Label {person}
+	
+	public void WritePersonsToGraph() {
+		try (Transaction tx = db.beginTx()) {
+			for (Person p: persons.values()) {
+				p.graphNode = db.createNode(person.person);
+				p.graphNode.setProperty("lastName", p.lastName);
+				p.graphNode.setProperty("givenName", p.givenName1);
+				p.graphNode.setProperty("DoB", p.dateOfBirth);
+				p.graphNode.setProperty("sex", p.sex);
+				p.graphNode.setProperty("recordDate", p.recordDate);
+			}
+			tx.success();
+		}
+	}
 	
 	public Person addNewPerson() {
 		Person p = new Person(true);

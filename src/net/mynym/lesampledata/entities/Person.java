@@ -2,10 +2,14 @@ package net.mynym.lesampledata.entities;
 
 import java.time.LocalDate;
 
+import org.neo4j.graphdb.Node;
+
 public class Person  implements Involvable {
 	public static Integer firstId = 500 * 1000 * 1000;
 	public static Integer lastId = firstId;
 	public Integer id = lastId++;
+	public Integer countOfInvolvements = 0;
+	public Node graphNode;
 	public String lastName;
 	public String givenName1;
 	public String givenName2;
@@ -25,8 +29,12 @@ public class Person  implements Involvable {
 	static Countries c = new Countries();
 	static PostCodeRepo postcodes = new PostCodeRepo();
 	
-	public Person() {
-		// This is used for deserialising from file
+	public Integer countOfInvolvements() {
+		return countOfInvolvements;
+	}
+	
+	public void incrementCountOfInvolvements() {
+		countOfInvolvements++;
 	}
 	
 	public Person(Boolean byProgram) {
@@ -58,6 +66,7 @@ public class Person  implements Involvable {
 		} else {
 			locality = country;
 		}
+		
 	}
 
 	

@@ -29,7 +29,7 @@ public class Context {
 	public Set<Involvement> involvements = new HashSet<>();
 
 	void addSomeActivities() {
-		int numOfActivities = r.nextInt(5);
+		int numOfActivities = r.nextInt(8);
 		for (int i = 0; i <= numOfActivities; i++) {
 			new Activity(this);
 		}

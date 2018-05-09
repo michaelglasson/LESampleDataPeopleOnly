@@ -9,7 +9,8 @@ import java.util.Random;
  */
 
 public class Activity {
-	static Integer lastId = 100 * 1000 * 1000;
+	static Integer firstId = 100 * 1000 * 1000;
+	static Integer lastId = firstId;
 	static Random r = new Random();
 	public Integer id;
 	public Context context;
@@ -18,8 +19,8 @@ public class Activity {
 	public String date;
 	// public String performedBy; // Future id of person doing the activity
 	
-	public Activity() {
-		// This is only for deserialisation from file
+	public static int countOfActivity() {
+		return lastId - firstId;
 	}
 	
 	public static String printHeader() {
@@ -50,7 +51,7 @@ public class Activity {
 	// Activity creates Involvements but Involvements add themselves to Context
 	// (so we don't need to assign them here). Create some number of involvements
 	public void addSomeInvolvements() {
-		int numOfInvolvements = r.nextInt(5);
+		int numOfInvolvements = r.nextInt(3);
 		for (int i = 0; i <= numOfInvolvements; i++) {
 			new Involvement(context, id);
 		}

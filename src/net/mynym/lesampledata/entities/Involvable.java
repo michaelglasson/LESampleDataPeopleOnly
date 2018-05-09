@@ -5,6 +5,9 @@ package net.mynym.lesampledata.entities;
  */
 
 public interface Involvable {
-	public Integer getId();
-	public String getType(); // e.g. Person
+	Integer getId();
+	String getType(); // e.g. Person
+	void incrementCountOfInvolvements();
+	Integer countOfInvolvements();
+	
 }

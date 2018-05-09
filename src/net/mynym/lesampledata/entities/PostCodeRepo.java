@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class PostCodeRepo {
-	List<Postcode> postcodes = new ArrayList<>();
+	public List<Postcode> postcodes = new ArrayList<>();
 	List<Integer> l = new ArrayList<>();
 	Random r = new Random();
 
