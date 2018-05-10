@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import net.mynym.lesampledata.processing.CreateNewWorld;
+
 /*
  * An association is a type of Entity that contains other Entities
  */
@@ -47,9 +49,9 @@ public class Association implements Involvable {
 		for (int i = 0; i <= numOfParticipants; i++) {
 			if (r.nextInt(100) > 90) {
 				// Create new Participant
-				participants.add(ContextRepo.pRepo.addNewPerson());
+				participants.add(CreateNewWorld.pRepo.addNewPerson());
 			} else {
-				participants.add(ContextRepo.pRepo.getRandomPerson());
+				participants.add(CreateNewWorld.pRepo.getRandomPerson());
 			}
 			
 		}

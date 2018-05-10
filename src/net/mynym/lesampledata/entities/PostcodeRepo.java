@@ -97,12 +97,4 @@ public class PostcodeRepo implements GraphingContainer {
 		Integer i = allLocalities.tailMap(r.nextInt(cumulativePopulation) + 1).firstKey();
 		return allLocalities.get(i);
 	}
-
-	// WriteToNeo4j creates, connects postcodes, suburbs
-	// Assumes transaction is being handled by repo
-
-	public void WriteToNeo4j(GraphDatabaseService db, Node country) {
-
-	}
-
 }

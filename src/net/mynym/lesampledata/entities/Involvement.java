@@ -2,6 +2,8 @@ package net.mynym.lesampledata.entities;
 
 import java.util.Random;
 
+import net.mynym.lesampledata.processing.CreateNewWorld;
+
 /*
  * An Involvement is a link between a Context and an Entity or Association
  */
@@ -40,11 +42,11 @@ public class Involvement {
 			// Want a person
 			if (r.nextInt(100) > 80) {
 				// Create new person
-				entity = ContextRepo.pRepo.addNewPerson();
+				entity = CreateNewWorld.pRepo.addNewPerson();
 			}
 			else {
 				// Use an existing person
-				entity = ContextRepo.pRepo.getRandomPerson();
+				entity = CreateNewWorld.pRepo.getRandomPerson();
 			}
 		}
 		else {
@@ -52,11 +54,11 @@ public class Involvement {
 			Association a;
 			if (r.nextInt(100) > 90) {
 				// Create new Association
-				a = ContextRepo.aRepo.addNewAssociation();
+				a = CreateNewWorld.aRepo.addNewAssociation();
 			}
 			else {
 				// Use an existing Association
-				a = ContextRepo.aRepo.getRandomAssociation();
+				a = CreateNewWorld.aRepo.getRandomAssociation();
 			}
 			// In any case, add some participants
 			a.addSomeParticipants();

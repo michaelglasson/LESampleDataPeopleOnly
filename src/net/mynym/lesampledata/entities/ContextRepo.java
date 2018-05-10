@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ContextRepo {
-	public static PersonRepo pRepo;
-	public static AssociationRepo aRepo;
 	public Map<Integer, Context> contexts = new HashMap<>();
 
 	public Context addNewContext() {

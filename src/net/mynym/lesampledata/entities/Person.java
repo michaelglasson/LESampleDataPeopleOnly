@@ -9,6 +9,7 @@ import org.neo4j.graphdb.Transaction;
 import net.mynym.lesampledata.entities.PersonRepo.person;
 import net.mynym.lesampledata.entities.PostcodeRepo.Locality;
 import net.mynym.lesampledata.entities.PostcodeRepo.isIn;
+import net.mynym.lesampledata.processing.CreateNewWorld;
 import net.mynym.lesampledata.processing.GraphingContainer;
 
 public class Person implements Involvable, GraphingContainer {
@@ -33,7 +34,6 @@ public class Person implements Involvable, GraphingContainer {
 	static FemaleFirstNames f = new FemaleFirstNames();
 	static MaleFirstNames m = new MaleFirstNames();
 	static Countries c = new Countries();
-	static PostcodeRepo postcodes = new PostcodeRepo();
 	Locality loc;
 
 	public Integer countOfInvolvements() {
@@ -66,7 +66,7 @@ public class Person implements Involvable, GraphingContainer {
 			isAlive = HelperFunctions.r.nextInt(100) > 95 ? "N" : "Y";
 		}
 		if (country.equalsIgnoreCase("Australia")) {
-			loc = postcodes.getRandomLocality();
+			loc = CreateNewWorld.pCodeRepo.getRandomLocality();
 			postcode = loc.postcode.code;
 			locality = loc.name;
 		} else {
