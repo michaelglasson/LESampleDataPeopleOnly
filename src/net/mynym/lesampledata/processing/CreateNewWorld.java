@@ -24,7 +24,7 @@ public class CreateNewWorld {
 		pCodeRepo = new PostcodeRepo();
 		
 		pRepo = new PersonRepo();
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 100; i++) {
 			pRepo.addNewPerson();
 		}
 		
@@ -32,7 +32,7 @@ public class CreateNewWorld {
 		
 		cRepo = new ContextRepo();
 		
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 1000; i++) {
 			cRepo.addNewContext();
 		}
 		

@@ -28,10 +28,6 @@ public class Involvement {
 				 activityId + "\t" + entity.getType() + "\t" + entity.getId() + "\r\n";
 	 }
 	
-	public Involvement() {
-		// This is for deserialisation from file
-	}
-
 	public Involvement(Context c, Integer activityId) {
 		id = lastId++;
 		type = InvolvementTypes.getRandomInvolvementType();
@@ -43,6 +39,7 @@ public class Involvement {
 			if (r.nextInt(100) > 80) {
 				// Create new person
 				entity = CreateNewWorld.pRepo.addNewPerson();
+				System.out.println(entity.getType());
 			}
 			else {
 				// Use an existing person
