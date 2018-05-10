@@ -1,5 +1,10 @@
 package net.mynym.lesampledata.processing;
 
+import java.io.File;
+
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+
 import net.mynym.lesampledata.entities.Activity;
 import net.mynym.lesampledata.entities.Association;
 import net.mynym.lesampledata.entities.AssociationRepo;
@@ -17,26 +22,21 @@ public class CreateNewWorld {
 
 	public static void main(String[] args) {
 		/*
-		 * Order of processing is postcodes, persons, associations, contexts,
+		 * Order of loading is postcodes, persons, associations, contexts,
 		 * activities, involvements.
 		 */
+		pCodeRepo = new PostcodeRepo(); //Loads codes
+		pRepo = new PersonRepo(); // Prepares repo
 		
-		pCodeRepo = new PostcodeRepo();
-		
-		pRepo = new PersonRepo();
-		for (int i = 0; i < 100; i++) {
-			pRepo.addNewPerson();
+		for (int i = 0; i < 1; i++) {
+			pRepo.addNewPerson(); // Seeds repo with people
 		}
 		
-		aRepo = new AssociationRepo();
-		
+		aRepo = new AssociationRepo(); 
 		cRepo = new ContextRepo();
-		
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 10000; i++) {
 			cRepo.addNewContext();
 		}
-		
-		
 		System.out.println("Completed run. Here are some statistics");
 		Runtime rt = Runtime.getRuntime();
 		System.out.println("Free memory: " + rt.freeMemory() / 1000000L + 
@@ -70,7 +70,12 @@ public class CreateNewWorld {
 		//pRepo.startGraphService();
 		//pRepo.WritePersonsToGraph();
 	
-		
+		/*
+				GraphDatabaseService db = new GraphDatabaseFactory()
+				.newEmbeddedDatabase(new File("C:\\Users\\mg\\Documents\\neo4j\\data\\databases\\graph.db"));
+		repo.graph(db);
+
+		 */
 			
 
 	}

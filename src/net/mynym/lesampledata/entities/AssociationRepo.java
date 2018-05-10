@@ -1,6 +1,8 @@
 package net.mynym.lesampledata.entities;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -10,10 +12,11 @@ public class AssociationRepo {
 	
 	public Association addNewAssociation() {
 		Association a = new Association();
-		a.addSomeParticipants();
 		put(a);
 		return a;
 	}
+	
+
 	
 	public String printHeader() {
 		StringBuilder line = new StringBuilder();

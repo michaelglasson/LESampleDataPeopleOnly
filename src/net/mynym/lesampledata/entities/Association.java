@@ -1,6 +1,8 @@
 package net.mynym.lesampledata.entities;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -57,6 +59,24 @@ public class Association implements Involvable {
 		}
 		
 	}
+	
+	public static class AssociationTypes {
+		static List<String> types = Arrays.asList("Club", "Family", "Institution", "Event");
+		static Random r = new Random();
+		
+		public static String getRandomAssociation() {
+			return types.get(r.nextInt(types.size()));	
+		}
+		
+		public String listTypes() {
+			StringBuilder s = new StringBuilder();
+			for (String t: types) {
+				s.append(t + "\r\n");
+			}
+			return s.toString();
+		}
+	}
+
 
 	@Override
 	public Integer getId() {

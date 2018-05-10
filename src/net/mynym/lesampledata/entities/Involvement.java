@@ -1,5 +1,7 @@
 package net.mynym.lesampledata.entities;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import net.mynym.lesampledata.processing.CreateNewWorld;
@@ -34,12 +36,11 @@ public class Involvement {
 		contextId = c.id;
 		c.involvements.add(this);
 		this.activityId = activityId;
-		if (r.nextInt(100) > 20) {
+		if (r.nextInt(100) > 4) {
 			// Want a person
-			if (r.nextInt(100) > 80) {
+			if (r.nextInt(100) > 60) {
 				// Create new person
 				entity = CreateNewWorld.pRepo.addNewPerson();
-				System.out.println(entity.getType());
 			}
 			else {
 				// Use an existing person
@@ -49,7 +50,7 @@ public class Involvement {
 		else {
 			// Want an association
 			Association a;
-			if (r.nextInt(100) > 90) {
+			if (r.nextInt(100) > 89) {
 				// Create new Association
 				a = CreateNewWorld.aRepo.addNewAssociation();
 			}
@@ -57,12 +58,21 @@ public class Involvement {
 				// Use an existing Association
 				a = CreateNewWorld.aRepo.getRandomAssociation();
 			}
-			// In any case, add some participants
+			// In either case, add some participants
 			a.addSomeParticipants();
 			entity = a;
 		}
 		entity.incrementCountOfInvolvements();
 	}
 	
-	
+	public static class InvolvementTypes {
+		static List<String> types = Arrays.asList("Suspect", "Witness", "Offender", "Victim");
+		static Random r = new Random();
+		
+		public static String getRandomInvolvementType() {
+			return types.get(r.nextInt(types.size()));	
+		}
+
+	}
+
 }

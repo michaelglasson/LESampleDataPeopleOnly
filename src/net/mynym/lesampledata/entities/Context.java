@@ -9,12 +9,16 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import org.neo4j.graphdb.GraphDatabaseService;
+
+import net.mynym.lesampledata.processing.GraphingContainer;
+
 /*
  * A Context is the business context within which activities take place. In turn, activities
  * discover people, things and links between them. A Context is associated with a team of 
  * people who perform the activities.
  */
-public class Context {
+public class Context implements GraphingContainer {
 	public static Integer lastId = 300 * 1000 * 1000;
 	public static Random r = new Random();
 	public static List<String> types;
@@ -43,7 +47,7 @@ public class Context {
 	public Context(Boolean byProgram) {
 		if (types == null)
 			loadContextTypesFromFile();
-		name = "Context " + id;
+		name = "C-" + id;
 		type = types.get(r.nextInt(types.size()));
 		team = "Team-" + (r.nextInt(98) + 1);
 		initiationDate = HelperFunctions.getRandomDateInLast20Years().toString();
@@ -88,6 +92,13 @@ public class Context {
 			s.append(i.toLine() + "\r\n");
 		}
 		return s.toString();
+	}
+
+	@Override
+	public void graph(GraphDatabaseService db) {
+		for (Activity a: activities) {
+			a.graph(db)
+		}
 	}
 
 }

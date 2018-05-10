@@ -50,7 +50,6 @@ public class PostcodeRepo implements GraphingContainer {
 			try (Transaction tx = db.beginTx()) {
 				graphNode = db.createNode(loc.postcode);
 				graphNode.setProperty("Code", code);
-
 				for (Locality s : localities) {
 					s.graphNode = db.createNode(loc.locality);
 					s.graphNode.setProperty("Name", s.name);

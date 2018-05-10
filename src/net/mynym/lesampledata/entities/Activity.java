@@ -1,17 +1,32 @@
 package net.mynym.lesampledata.entities;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.RelationshipType;
+import org.neo4j.graphdb.Transaction;
+
+import net.mynym.lesampledata.entities.PostcodeRepo.Locality;
+import net.mynym.lesampledata.entities.PostcodeRepo.isIn;
+import net.mynym.lesampledata.entities.PostcodeRepo.loc;
+import net.mynym.lesampledata.processing.Graphable;
 
 /*
  * An Activity takes place within a Context and creates or modifies involvements,
  * adding them to the Context. Activities are encapsulated fully within Contexts.
+ * Activity is not a container.
  */
 
-public class Activity {
+public class Activity implements Graphable {
 	static Integer firstId = 100 * 1000 * 1000;
 	static Integer lastId = firstId;
 	static Random r = new Random();
+	Node graphNode;
 	public Integer id;
 	public Context context;
 	public Integer contextId;
@@ -56,4 +71,39 @@ public class Activity {
 			new Involvement(context, id);
 		}
 	}
+	
+	public static class ActivityTypes {
+		static final List<String> types = Arrays.asList("Interview", "Research", "Scientific", "Observation");
+		static Random r = new Random();
+		
+		public static String getRandomActivity() {
+			return types.get(r.nextInt(types.size()));	
+		}
+	}
+
+	public enum aLabel implements Label {activity}
+	
+	@Override
+	public void graph(GraphDatabaseService db, Node parent, RelationshipType rel, Boolean pointsToParent) {
+		try (Transaction tx = db.beginTx()) {
+			graphNode = db.createNode(aLabel.activity);
+			graphNode.setProperty("Type", type);
+			for (Locality s : localities) {
+				s.graphNode = db.createNode(loc.locality);
+				s.graphNode.setProperty("Name", s.name);
+				s.graphNode.createRelationshipTo(graphNode, isIn.isIn);
+			}
+			tx.success();
+		}
+
+		
+		
+	}
+
+	@Override
+	public Node getNode() {
+		// TODO Auto-generated method stub
+		return graphNode;
+	}
+
 }
