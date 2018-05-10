@@ -11,7 +11,7 @@ public class Countries {
 	public List<String> theNames = new ArrayList<>(200);
 	Random r = new Random();
 	
-	public String getCountry() {
+	public String getRandomCountry() {
 		if (r.nextInt(100) > 20) return "Australia";
 		return theNames.get(r.nextInt(theNames.size()));
 		

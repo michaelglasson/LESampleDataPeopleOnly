@@ -11,7 +11,7 @@ import net.mynym.lesampledata.entities.Involvement;
 import net.mynym.lesampledata.entities.Person;
 import net.mynym.lesampledata.entities.PersonRepo;
 
-public class CreateContexts {
+public class CreateWorld {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		ContextRepo cRepo = new ContextRepo();
@@ -54,8 +54,8 @@ public class CreateContexts {
 		System.out.println("Maximum number of Involvements for a Person: " + j);
 		
 		WriteWorldToFile.writeToFlatFiles(cRepo, pRepo, aRepo);
-		pRepo.startGraphService();
-		pRepo.WritePersonsToGraph();
+		//pRepo.startGraphService();
+		//pRepo.WritePersonsToGraph();
 
 	}
 
