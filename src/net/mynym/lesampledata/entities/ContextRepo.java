@@ -7,7 +7,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ContextRepo {
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+
+import net.mynym.lesampledata.processing.Graphable;
+
+public class ContextRepo implements Graphable {
 	public Map<Integer, Context> contexts = new HashMap<>();
 
 	public Context addNewContext() {
@@ -60,6 +65,25 @@ public class ContextRepo {
 				put(c);
 			}
 		}
+	}
+
+	@Override
+	public void graph(GraphDatabaseService db) {
+		for (Context c: contexts.values()) {
+			c.graph(db);
+		}
+	}
+
+	@Override
+	public void setGraphNode(Node graphNode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Node getGraphNode() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

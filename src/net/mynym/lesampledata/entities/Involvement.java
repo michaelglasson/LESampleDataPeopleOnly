@@ -4,7 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import org.neo4j.graphdb.Node;
+
+import net.mynym.lesampledata.entities.AssociationRepo.Association;
 import net.mynym.lesampledata.processing.CreateNewWorld;
+import net.mynym.lesampledata.processing.GraphableInvolvable;
 
 /*
  * An Involvement is a link between a Context and an Entity or Association
@@ -12,12 +16,13 @@ import net.mynym.lesampledata.processing.CreateNewWorld;
 public class Involvement {
 	public static Integer firstId = 400 * 1000 * 1000;
 	public static Integer lastId = firstId;
+	public Node graphNode;
 	public Integer id;
 	static Random r = new Random();
 	public String type;
-	public Integer contextId; // The Context of this Involvement
-	public Integer activityId; // The Activity that discovered this Involvement
-	public Involvable entity; // Person, thing or association involved
+	public Context context; // The Context of this Involvement
+	public Activity activity; // The Activity that discovered this Involvement
+	public GraphableInvolvable entity; // Person, thing or association involved
 	
 	public static int countOfInvolvement() {
 		return lastId-firstId;
@@ -26,16 +31,16 @@ public class Involvement {
 		return "id\ttype\tcontextId\tactivityId\tentityType\tentityId\r\n";
 	}
 	 public String toLine() {
-		 return id + "\t" + type + "\t" + contextId + "\t" +
-				 activityId + "\t" + entity.getType() + "\t" + entity.getId() + "\r\n";
+		 return id + "\t" + type + "\t" + context.id + "\t" +
+				 activity.id + "\t" + entity.getType() + "\t" + entity.getId() + "\r\n";
 	 }
 	
-	public Involvement(Context c, Integer activityId) {
+	public Involvement(Context c, Activity activity) {
 		id = lastId++;
 		type = InvolvementTypes.getRandomInvolvementType();
-		contextId = c.id;
+		context = c;
 		c.involvements.add(this);
-		this.activityId = activityId;
+		this.activity = activity;
 		if (r.nextInt(100) > 4) {
 			// Want a person
 			if (r.nextInt(100) > 60) {

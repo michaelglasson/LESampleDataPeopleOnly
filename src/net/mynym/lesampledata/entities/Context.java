@@ -10,18 +10,24 @@ import java.util.Random;
 import java.util.Set;
 
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Transaction;
 
-import net.mynym.lesampledata.processing.GraphingContainer;
+import net.mynym.lesampledata.processing.Graphable;
+import net.mynym.lesampledata.processing.Labels;
+import net.mynym.lesampledata.processing.RelTypes;
 
 /*
  * A Context is the business context within which activities take place. In turn, activities
  * discover people, things and links between them. A Context is associated with a team of 
  * people who perform the activities.
  */
-public class Context implements GraphingContainer {
+public class Context implements Graphable {
 	public static Integer lastId = 300 * 1000 * 1000;
 	public static Random r = new Random();
 	public static List<String> types;
+	public Node graphNode;
 	public Integer id = lastId++;
 	public String name;
 	public String type;
@@ -37,7 +43,6 @@ public class Context implements GraphingContainer {
 		for (int i = 0; i <= numOfActivities; i++) {
 			new Activity(this);
 		}
-
 	}
 
 	public Context() {
@@ -96,9 +101,39 @@ public class Context implements GraphingContainer {
 
 	@Override
 	public void graph(GraphDatabaseService db) {
-		for (Activity a: activities) {
-			a.graph(db)
+		try (Transaction tx = db.beginTx()) {
+			graphNode = db.createNode(Labels.Context);
+			graphNode.setProperty("id", id);
+			graphNode.setProperty("name", name);
+			graphNode.setProperty("type", type);
+			graphNode.setProperty("team", team);
+			graphNode.setProperty("initiationDate", initiationDate);
+			graphNode.setProperty("finalisationDate", finalisationDate);
+			for (Activity a: activities) {
+				a.graphNode = db.createNode(Labels.Activity);
+				a.graphNode.createRelationshipTo(graphNode, RelTypes.isFor);
+				a.graph(db);
+			}
+			for (Involvement i: involvements) {
+				Relationship r = graphNode.createRelationshipTo(i.entity.getGraphNode(), RelTypes.involves);
+				r.setProperty("id", id);
+				r.setProperty("role", i.type);
+				r.setProperty("id", i.activity.id);
+			}
+			tx.success();
 		}
+	}
+
+	@Override
+	public void setGraphNode(Node graphNode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Node getGraphNode() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

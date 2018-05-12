@@ -8,14 +8,13 @@ import java.util.Map;
 import java.util.Random;
 
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Label;
+import org.neo4j.graphdb.Node;
 
-import net.mynym.lesampledata.processing.GraphingContainer;
+import net.mynym.lesampledata.processing.Graphable;
 
-public class PersonRepo implements GraphingContainer {
+public class PersonRepo implements Graphable {
 	public Map<Integer, Person> persons = new HashMap<>();
 	static Random r = new Random();
-	public enum person implements Label {person}
 
 
 	@Override
@@ -60,7 +59,6 @@ public class PersonRepo implements GraphingContainer {
 		line.append("givenName2" + "\t");
 		line.append("dateOfBirth" + "\t");
 		line.append("sex" + "\t");
-		line.append("country" + "\t");
 		line.append("isAlive" + "\t");
 		line.append("locality" + "\t");
 		line.append("postcode" + "\t");
@@ -76,6 +74,20 @@ public class PersonRepo implements GraphingContainer {
 
 	public Person get(Integer key) {
 		return persons.get(key);
+	}
+
+
+	@Override
+	public void setGraphNode(Node graphNode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Node getGraphNode() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

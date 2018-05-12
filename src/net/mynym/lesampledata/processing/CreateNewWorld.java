@@ -1,21 +1,16 @@
 package net.mynym.lesampledata.processing;
 
-import java.io.File;
-
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-
 import net.mynym.lesampledata.entities.Activity;
-import net.mynym.lesampledata.entities.Association;
 import net.mynym.lesampledata.entities.AssociationRepo;
+import net.mynym.lesampledata.entities.AssociationRepo.Association;
 import net.mynym.lesampledata.entities.ContextRepo;
 import net.mynym.lesampledata.entities.Involvement;
 import net.mynym.lesampledata.entities.Person;
 import net.mynym.lesampledata.entities.PersonRepo;
-import net.mynym.lesampledata.entities.PostcodeRepo;
+import net.mynym.lesampledata.entities.LocalityRepo;
 
 public class CreateNewWorld {
-	public static PostcodeRepo pCodeRepo;
+	public static LocalityRepo pCodeRepo;
 	public static PersonRepo pRepo;
 	public static AssociationRepo aRepo;
 	public static ContextRepo cRepo;
@@ -25,7 +20,7 @@ public class CreateNewWorld {
 		 * Order of loading is postcodes, persons, associations, contexts,
 		 * activities, involvements.
 		 */
-		pCodeRepo = new PostcodeRepo(); //Loads codes
+		pCodeRepo = new LocalityRepo(); //Loads codes
 		pRepo = new PersonRepo(); // Prepares repo
 		
 		for (int i = 0; i < 1; i++) {
@@ -67,16 +62,7 @@ public class CreateNewWorld {
 		System.out.println("Maximum number of Involvements for a Person: " + j);
 		
 		WriteWorldToFile.writeToFlatFiles(cRepo, pRepo, aRepo);
-		//pRepo.startGraphService();
-		//pRepo.WritePersonsToGraph();
-	
-		/*
-				GraphDatabaseService db = new GraphDatabaseFactory()
-				.newEmbeddedDatabase(new File("C:\\Users\\mg\\Documents\\neo4j\\data\\databases\\graph.db"));
-		repo.graph(db);
-
-		 */
-			
+		WriteWorldToNeo4j.writeToNeo4j(pCodeRepo, cRepo, pRepo, aRepo);
 
 	}
 
