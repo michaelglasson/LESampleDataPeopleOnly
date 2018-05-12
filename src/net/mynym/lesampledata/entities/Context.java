@@ -24,7 +24,7 @@ import net.mynym.lesampledata.processing.RelTypes;
  * people who perform the activities.
  */
 public class Context implements Graphable {
-	public static Integer lastId = 300 * 1000 * 1000;
+	public static Integer lastId = 1000;
 	public static Random r = new Random();
 	public static List<String> types;
 	public Node graphNode;

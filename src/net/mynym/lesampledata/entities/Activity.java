@@ -18,7 +18,7 @@ import net.mynym.lesampledata.processing.Graphable;
  */
 
 public class Activity implements Graphable {
-	static Integer firstId = 100 * 1000 * 1000;
+	static Integer firstId = 1000;
 	static Integer lastId = firstId;
 	static Random r = new Random();
 	Node graphNode;
@@ -68,7 +68,7 @@ public class Activity implements Graphable {
 	}
 
 	public static class ActivityTypes {
-		static final List<String> types = Arrays.asList("Interview", "Research", "Scientific", "Observation");
+		static final List<String> types = Arrays.asList("Interview", "Research", "Forensic", "Observation");
 		static Random r = new Random();
 
 		public static String getRandomActivity() {

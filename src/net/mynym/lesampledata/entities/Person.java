@@ -13,7 +13,7 @@ import net.mynym.lesampledata.processing.Labels;
 import net.mynym.lesampledata.processing.RelTypes;
 
 public class Person implements GraphableInvolvable {
-	public static Integer firstId = 500 * 1000 * 1000;
+	public static Integer firstId = 1000;
 	public static Integer lastId = firstId;
 	public Integer id = lastId++;
 	public Integer countOfInvolvements = 0;

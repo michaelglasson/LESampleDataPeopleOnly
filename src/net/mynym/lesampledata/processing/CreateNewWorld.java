@@ -62,7 +62,7 @@ public class CreateNewWorld {
 		System.out.println("Maximum number of Involvements for a Person: " + j);
 		
 		WriteWorldToFile.writeToFlatFiles(cRepo, pRepo, aRepo);
-		WriteWorldToNeo4j.writeToNeo4j(pCodeRepo, cRepo, pRepo, aRepo);
+		//WriteWorldToNeo4j.writeToNeo4j(pCodeRepo, cRepo, pRepo, aRepo);
 
 	}
 

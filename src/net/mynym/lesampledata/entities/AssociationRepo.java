@@ -12,12 +12,11 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 
-import net.mynym.lesampledata.entities.LocalityRepo.Locality;
 import net.mynym.lesampledata.processing.CreateNewWorld;
+import net.mynym.lesampledata.processing.Graphable;
 import net.mynym.lesampledata.processing.GraphableInvolvable;
 import net.mynym.lesampledata.processing.Labels;
 import net.mynym.lesampledata.processing.RelTypes;
-import net.mynym.lesampledata.processing.Graphable;
 
 public class AssociationRepo implements Graphable {
 	public Map<Integer, Association> associations = new HashMap<>();

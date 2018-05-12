@@ -1,61 +1,45 @@
-archery
-badminton
-baseball
-basketball
-beach volleyball
-bowling
-boxing
-canoe
-chariot racing
-climbing
-cricket
-croquet
-dancing
-diving
-equestrian
-fencing
-field hockey
-golf
-gymnastics
-handball
-jeu de paume
-judo
-karate
-kayak
-lacrosse
-motor boating
-mountain cycling
-netball
-obstacle race for swimming
-pankration
-pentathlon
-plunge for distance
-polo
-racquets
-road cycling
-roller sport
-rowing
-rugby 7s
-rugby union
-sailing
-shooting
-soccer
-softball
-squash
-surfing
-swimming
-synchronized swimming
-table tennis
-taekwondo
-tennis
-track and field
-track cycling
-triathlon
-tug-of-war
-underwater swimming
-volleyball (indoor)
-wakeboard
-water polo
-weightlifting
-wrestling
-wushu
+Archery
+Badminton
+Baseball
+Basketball
+Bowling
+Boxing
+Canoe
+Climbing
+Cricket
+Croquet
+Dancing
+Diving
+Equestrian
+Fencing
+Hockey
+Golf
+Gymnastics
+Handball
+Judo
+Karate
+Kayak
+Lacrosse
+Netball
+Pentathlon
+Polo
+Racquets
+Cycling
+Rowing
+Rugby 7s
+Rugby union
+Sailing
+Shooting
+Soccer
+Softball
+Squash
+Surfing
+Swimming
+Taekwondo
+Tennis
+Track and field
+Triathlon
+Volleyball
+Water polo
+Weightlifting
+Wrestling

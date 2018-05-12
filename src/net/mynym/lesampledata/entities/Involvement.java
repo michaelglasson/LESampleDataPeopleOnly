@@ -14,7 +14,7 @@ import net.mynym.lesampledata.processing.GraphableInvolvable;
  * An Involvement is a link between a Context and an Entity or Association
  */
 public class Involvement {
-	public static Integer firstId = 400 * 1000 * 1000;
+	public static Integer firstId = 1000;
 	public static Integer lastId = firstId;
 	public Node graphNode;
 	public Integer id;
