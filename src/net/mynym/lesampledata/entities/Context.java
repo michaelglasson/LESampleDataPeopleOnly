@@ -14,6 +14,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 
+import net.mynym.lesampledata.entities.LocalityRepo.Locality;
 import net.mynym.lesampledata.processing.Graphable;
 import net.mynym.lesampledata.processing.Labels;
 import net.mynym.lesampledata.processing.RelTypes;
@@ -31,6 +32,7 @@ public class Context implements Graphable {
 	public Integer id = lastId++;
 	public String name;
 	public String type;
+	public Locality loc;
 	public String team;
 	public String initiationDate;
 	public String finalisationDate;
@@ -46,14 +48,14 @@ public class Context implements Graphable {
 	}
 
 	public Context() {
-		// This for deserialisation from file
+		
 	}
-
 	public Context(Boolean byProgram) {
 		if (types == null)
 			loadContextTypesFromFile();
-		name = "C-" + id;
 		type = types.get(r.nextInt(types.size()));
+		name = type + "-" + id;
+		loc = LocalityRepo.getRandomLocality();
 		team = "Team-" + (r.nextInt(98) + 1);
 		initiationDate = HelperFunctions.getRandomDateInLast20Years().toString();
 		addSomeActivities();
@@ -76,6 +78,7 @@ public class Context implements Graphable {
 		line.append(id + "\t");
 		line.append(name + "\t");
 		line.append(type + "\t");
+		line.append(loc.name + "\t");
 		line.append(team + "\t");
 		line.append(initiationDate + "\t");
 		line.append((finalisationDate == null ? "" : finalisationDate) + "\t");
@@ -109,6 +112,8 @@ public class Context implements Graphable {
 			graphNode.setProperty("team", team);
 			graphNode.setProperty("initiationDate", initiationDate);
 			graphNode.setProperty("finalisationDate", finalisationDate);
+			graphNode.createRelationshipTo(loc.graphNode, RelTypes.isWasAt);
+
 			for (Activity a: activities) {
 				a.graphNode = db.createNode(Labels.Activity);
 				a.graphNode.createRelationshipTo(graphNode, RelTypes.isFor);

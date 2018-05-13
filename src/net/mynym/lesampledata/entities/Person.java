@@ -7,7 +7,6 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 
 import net.mynym.lesampledata.entities.LocalityRepo.Locality;
-import net.mynym.lesampledata.processing.CreateNewWorld;
 import net.mynym.lesampledata.processing.GraphableInvolvable;
 import net.mynym.lesampledata.processing.Labels;
 import net.mynym.lesampledata.processing.RelTypes;
@@ -60,7 +59,7 @@ public class Person implements GraphableInvolvable {
 		} else {
 			isAlive = HelperFunctions.r.nextInt(100) > 95 ? "N" : "Y";
 		}
-		loc = CreateNewWorld.pCodeRepo.getRandomLocality();
+		loc = LocalityRepo.getRandomLocality();
 	}
 
 	public String toLine() {

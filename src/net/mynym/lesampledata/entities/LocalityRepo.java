@@ -3,11 +3,9 @@ package net.mynym.lesampledata.entities;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -20,10 +18,11 @@ import net.mynym.lesampledata.processing.Labels;
 import net.mynym.lesampledata.processing.RelTypes;
 
 public class LocalityRepo implements Graphable {
-	public Map<String, Postcode> postcodes = new HashMap<>();
-	public SortedMap<Integer, Locality> allLocalities = new TreeMap<>();
-	public Integer cumulativePopulation = 0;
-	Random r = new Random();
+	static final SortedMap<String, Postcode> postcodes = new TreeMap<>();
+	static final SortedMap<Integer, Locality> allLocalities = new TreeMap<>();
+	static Integer cumulativePopulation = 0;
+	
+	static final Random r = new Random();
 
 	@Override
 	public void graph(GraphDatabaseService db) {
@@ -34,7 +33,7 @@ public class LocalityRepo implements Graphable {
 
 	public class Postcode implements Graphable {
 		public String code;
-		public Set<Locality> localities = new HashSet<>();
+		public List<Locality> localities = new ArrayList<>();
 		Node graphNode;
 
 		@Override
@@ -103,7 +102,7 @@ public class LocalityRepo implements Graphable {
 					l.name = line;
 					overseas.localities.add(l);
 					l.postcode = overseas;
-					cumulativePopulation += 80;
+					cumulativePopulation += 20;
 					allLocalities.put(cumulativePopulation, l);
 				}
 			}
@@ -112,10 +111,24 @@ public class LocalityRepo implements Graphable {
 			}
 		}
 
-	public Locality getRandomLocality() {
+	public static Locality getRandomLocality() {
 		Integer i = allLocalities.tailMap(r.nextInt(cumulativePopulation) + 1).firstKey();
 		return allLocalities.get(i);
 	}
+	
+	public static Locality getRandomLocalityFromSamePostcode(Locality l) {
+		return l.postcode.localities.get(r.nextInt(l.postcode.localities.size()));
+	}
+	
+	
+	public static Locality getRandomLocalityFromSameState(Locality l) {
+		
+		
+		
+		return l;
+	}
+
+	
 
 	@Override
 	public void setGraphNode(Node graphNode) {

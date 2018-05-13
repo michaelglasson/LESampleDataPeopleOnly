@@ -21,7 +21,7 @@ import net.mynym.lesampledata.processing.RelTypes;
 public class AssociationRepo implements Graphable {
 	public Map<Integer, Association> associations = new HashMap<>();
 	public static final Random r = new Random();
-	public static Integer firstId = 200 * 1000 * 1000;
+	public static Integer firstId = 1000;
 	public static Integer lastId = firstId;
 	
 	public Association addNewAssociation() {

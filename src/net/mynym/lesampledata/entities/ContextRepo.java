@@ -34,6 +34,7 @@ public class ContextRepo implements Graphable {
 		line.append("id" + "\t");
 		line.append("name" + "\t");
 		line.append("type" + "\t");
+		line.append("location" + "\t");
 		line.append("team" + "\t");
 		line.append("initiationDate" + "\t");
 		line.append("finalisationDate" + "\t");
