@@ -16,8 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CreatePersons {
 	public static List<String> femaleFirstNames = new ArrayList<>(2100);
 	public static List<String> maleFirstNames = new ArrayList<>(1300);
-	public static List<String> lastNames = new ArrayList<>(25000);
-	public static List<Person> persons = new ArrayList<>(100000);
+	public static List<String> lastNames = new ArrayList<>(12000);
+	public static List<Person> persons = new ArrayList<>(12000);
 	public static Random r = new Random();
 	static final SortedMap<Integer, Postcode> allCodes = new TreeMap<>();
 
@@ -26,17 +26,18 @@ public class CreatePersons {
 		String line;
 		int cumulativePopulation = 0;
 		try {
-
 			br = new BufferedReader(new FileReader("Resources\\FemaleFirstNames.txt"));
 			while ((line = br.readLine()) != null) {
 				femaleFirstNames.add(line);
 			}
 			System.out.println("Number of female first names: " + femaleFirstNames.size());
+
 			br = new BufferedReader(new FileReader("Resources\\MaleFirstNames.txt"));
 			while ((line = br.readLine()) != null) {
 				maleFirstNames.add(line);
 			}
 			System.out.println("Number of male first names: " + maleFirstNames.size());
+			
 			br = new BufferedReader(new FileReader("Resources\\LastNames10000.txt"));
 			while ((line = br.readLine()) != null) {
 				lastNames.add(line);
